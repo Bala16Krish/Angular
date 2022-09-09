@@ -1,0 +1,65 @@
+<div class="container">
+    <p class="header-title">{{title}}</p>
+    <div class="row">
+        <div class="col col-md-12" style=" max-height: 100vh">
+            <form [formGroup]="registerForm" (ngSubmit)="submit()">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">User Name</label>
+                    <input type="text" class="form-control" id="userName" formControlName="userName" />
+                    <div *ngIf="f['userName'].touched && f['userName'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['userName'].errors && f['userName'].errors['required']">User Name is required.
+                        </div>
+                        <div *ngIf="f['userName'].errors && f['userName'].errors['minlength']">User Name should be 3
+                            character.</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-Mail</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" />
+                    <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
+                        <div *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid email address.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" />
+                    <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['password'].errors && f['password'].errors['required']">Password is required.
+                        </div>
+                        <div *ngIf="f['password'].errors && f['password']['errors']['minLength']">Password must be at
+                            least
+                            6 characters.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmpwd" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmpwd" formControlName="confirmPwd" />
+                    <div *ngIf="f['confirmPwd'].touched && f['confirmPwd'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['confirmPwd'].errors && f['confirmPwd'].errors['required']">Conform Password is
+                            required.
+                        </div>
+                        <div *ngIf="f['confirmPwd'].errors && f['confirmPwd']['errors']['confirmedValidator']">Password
+                            and
+                            Confirm Password must be
+                            match.</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <select class="custom-select mb-3" (change)="changeRole($event)" formControlName="role">
+                        <option value="">Choose Role</option>
+                        <option *ngFor="let role of Role" [ngValue]="role">
+                            {{ role }}
+                        </option>
+                    </select>
+                </div>
+                <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col col-md-4">
+            <div style="position: fixed">{{ preview }}</div>
+        </div>
+    </div>
+</div>
